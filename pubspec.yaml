@@ -1,0 +1,54 @@
+name: news
+description: "A new Flutter project."
+
+publish_to: 'none' 
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.3.1 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.8
+
+  # for state management and context less stuff
+  get: ^4.6.6
+
+  # log events in clear way inset of (print)
+  logger: ^2.2.0
+
+  # for responsive design
+  flutter_screenutil: ^5.9.0
+
+  # for api requests
+  dio: ^5.4.3+1
+
+  # for dio api logging and debugging
+  pretty_dio_logger: ^1.3.1
+
+  # shared preferences persistence key value store
+  shared_preferences: ^2.2.3
+
+  # network connectivity
+  connection_notifier: ^2.0.1
+
+  # cache Image
+  cached_network_image: ^3.3.1
+  carousel_slider: ^4.2.1
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^3.0.2
+
+flutter:
+
+  uses-material-design: true
+
+  assets:
+    - assets/
