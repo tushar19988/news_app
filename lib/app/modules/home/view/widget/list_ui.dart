@@ -9,16 +9,22 @@ import 'package:news/config/theme/dark_theme_colors.dart';
 import 'package:news/utils/helper.dart';
 
 class ListUI extends StatelessWidget {
-  const ListUI({super.key, required this.articles});
+  const ListUI({
+    super.key,
+    required this.articles,
+    required this.savePost,
+  });
 
   final Articles articles;
+  final VoidCallback savePost;
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(
-      builder: (context) {
+      builder: (controller) {
+        bool? isBookmarked = controller.isArticleBookmarked(articles);
+
         return SizedBox(
-          height: 130.h,
           width: double.infinity,
           child: Stack(
             children: [
@@ -64,9 +70,17 @@ class ListUI extends StatelessWidget {
                         ),
                         Padding(
                           padding: EdgeInsets.only(right: 20.w),
-                          child: Icon(
-                            Icons.bookmark_outlined,
-                            size: 16.r,
+                          child: IconButton(
+                            onPressed: savePost,
+                            icon: Icon(
+                              Icons.bookmark_outlined,
+                              size: 16.r,
+                              color: isBookmarked == true
+                                  ? Colors.orange
+                                  : Get.isDarkMode
+                                      ? Colors.white
+                                      : Colors.black,
+                            ),
                           ),
                         ),
                       ],

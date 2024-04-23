@@ -10,6 +10,7 @@ class ImageCard extends StatelessWidget {
   final String timeAgo;
   final String comment;
   final String view;
+  final Widget? savePost;
 
   const ImageCard({
     super.key,
@@ -17,12 +18,13 @@ class ImageCard extends StatelessWidget {
     required this.timeAgo,
     required this.comment,
     required this.view,
+    this.savePost,
   });
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(
-      builder: (context) {
+      builder: (controller) {
         return SizedBox(
           height: 350.h,
           child: Stack(
@@ -117,11 +119,14 @@ class ImageCard extends StatelessWidget {
                                 Icons.share,
                                 color: Colors.white,
                               ),
-                              20.horizontalSpace,
-                              const Icon(
-                                Icons.bookmark,
-                                color: Colors.white,
-                              ),
+                              savePost ??
+                                  IconButton(
+                                    onPressed: () {},
+                                    icon: const Icon(
+                                      Icons.bookmark,
+                                      color: Colors.white,
+                                    ),
+                                  ),
                               10.horizontalSpace,
                             ],
                           ),

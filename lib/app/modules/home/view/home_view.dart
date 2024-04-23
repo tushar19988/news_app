@@ -18,7 +18,7 @@ class HomeView extends GetView<HomeController> {
         body: [
           HomeUi(),
           const Search(),
-          const BookMark(),
+          BookMark(),
           SettingView(),
         ][controller.currentPageIndex],
       );

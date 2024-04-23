@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:news/app/components/custom_snackbar.dart';
 import 'package:news/app/data/models/news_model.dart';
 import 'package:news/app/services/api_call_status.dart';
 import 'package:news/app/services/base_client.dart';
@@ -13,6 +14,8 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   int currentPageIndex = 0;
 
   List<Articles>? article;
+
+  List<Articles>? bookmarkedArticles = [];
 
   ApiCallStatus apiCallStatus = ApiCallStatus.holding;
 
@@ -55,6 +58,26 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   onChangeIndex(int index) {
     currentPageIndex = index;
     update();
+  }
+
+  void addBookmark(Articles article) {
+    bool? isBookmarked = isArticleBookmarked(article);
+
+    if (!isBookmarked!) {
+      bookmarkedArticles?.add(article);
+      CustomSnackBar.showCustomSnackBar(
+        message: 'added successfully!',
+        title: 'News',
+      );
+    } else {
+      bookmarkedArticles?.removeWhere((element) => element.url == article.url);
+    }
+
+    update();
+  }
+
+  bool? isArticleBookmarked(Articles article) {
+    return bookmarkedArticles?.any((element) => element.url == article.url);
   }
 
   getData() async {
